@@ -140,16 +140,23 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="primerLeage" translatesAutoresizingMaskIntoConstraints="NO" id="6HV-E1-YcF">
-                                                    <rect key="frame" x="0.0" y="12" width="414" height="76"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PremierLeague2" translatesAutoresizingMaskIntoConstraints="NO" id="6HV-E1-YcF">
+                                                    <rect key="frame" x="142.5" y="0.0" width="129" height="100"/>
                                                 </imageView>
+                                                <view alpha="0.34999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TUS-Uk-M0K">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
+                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </view>
                                             </subviews>
-                                            <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstItem="6HV-E1-YcF" firstAttribute="centerY" secondItem="wb3-rr-eqP" secondAttribute="centerY" id="K2H-SU-G58"/>
-                                                <constraint firstItem="6HV-E1-YcF" firstAttribute="width" secondItem="wb3-rr-eqP" secondAttribute="width" id="W8J-wy-r8K"/>
-                                                <constraint firstItem="6HV-E1-YcF" firstAttribute="centerX" secondItem="wb3-rr-eqP" secondAttribute="centerX" id="kRc-tT-xrl"/>
-                                                <constraint firstItem="6HV-E1-YcF" firstAttribute="height" secondItem="wb3-rr-eqP" secondAttribute="height" multiplier="0.761905" id="lc9-On-hgK"/>
+                                                <constraint firstItem="6HV-E1-YcF" firstAttribute="centerX" secondItem="wb3-rr-eqP" secondAttribute="centerX" id="3ea-z9-jym"/>
+                                                <constraint firstItem="6HV-E1-YcF" firstAttribute="height" secondItem="wb3-rr-eqP" secondAttribute="height" id="8U9-3g-cWT"/>
+                                                <constraint firstItem="6HV-E1-YcF" firstAttribute="width" secondItem="wb3-rr-eqP" secondAttribute="width" multiplier="0.311594" id="CDJ-jr-uq5"/>
+                                                <constraint firstAttribute="trailing" secondItem="TUS-Uk-M0K" secondAttribute="trailing" id="Tzd-uF-emr"/>
+                                                <constraint firstItem="TUS-Uk-M0K" firstAttribute="leading" secondItem="wb3-rr-eqP" secondAttribute="leading" id="can-dg-Bpa"/>
+                                                <constraint firstItem="TUS-Uk-M0K" firstAttribute="top" secondItem="wb3-rr-eqP" secondAttribute="top" id="hXN-Qu-jKM"/>
+                                                <constraint firstAttribute="bottom" secondItem="TUS-Uk-M0K" secondAttribute="bottom" id="sLA-Tc-dvh"/>
+                                                <constraint firstItem="6HV-E1-YcF" firstAttribute="centerY" secondItem="wb3-rr-eqP" secondAttribute="centerY" id="uWW-80-3aq"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -568,10 +575,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="PremierLeague2" width="512" height="512"/>
         <image name="arsenal" width="512" height="512"/>
         <image name="calendar" width="512" height="512"/>
         <image name="chelsea" width="512" height="512"/>
-        <image name="primerLeage" width="512" height="341"/>
         <image name="sportscourt.fill" catalog="system" width="128" height="84"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

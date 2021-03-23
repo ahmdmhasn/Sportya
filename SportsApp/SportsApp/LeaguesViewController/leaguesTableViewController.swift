@@ -42,7 +42,7 @@ class leaguesTableViewController: UITableViewController {
             return UITableViewCell()
         }
         
-        cell.leagueImageView.image=UIImage(named: "primerLeage")
+        cell.leagueImageView.image=UIImage(named: "PremierLeague2")
         
         //make pic circular
         cell.leagueImageView.layer.borderWidth = 1.0
