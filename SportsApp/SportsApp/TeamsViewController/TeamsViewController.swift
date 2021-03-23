@@ -27,7 +27,7 @@ class TeamDetailsViewController: UIViewController {
         countryNameLabel.text="England"
         foundedYearLabel.text="1892"
         stadiumNameLabel.text="Emiartes stadium"
-        descriptionLabel.text="""
+        /*descriptionLabel.text="""
  Arsenal Football Club is a professional football club based in Islington, London, England that plays in the Premier League, the top flight of English football. The club has won 13 league titles (including one unbeaten title), a record 14 FA Cups, two League Cups, 16 FA Community Shields, the League Centenary Trophy, one European Cup Winners' Cup, and one Inter-Cities Fairs Cup.
         
         Arsenal was the first club from the South of England to join The Football League, in 1893, and they reached the First Division in 1904. Relegated only once, in 1913, they continue the; longest streak in the top division,[6] and have won the second-most top-flight matches in English football history.[7] In the 1930s, Arsenal won five League Championships and two FA Cups, and another FA Cup and two Championships after the war. In 1970–71, they won their first League and FA Cup Double. Between 1989 and 2005, they won five League titles and five FA Cups, including two more Doubles. They completed the 20th century with the highest average league position.[8]
@@ -36,6 +36,7 @@ class TeamDetailsViewController: UIViewController {
 
         In 1886 munitions workers at the Royal Arsenal in Woolwich founded the club as Dial Square.In 1913, the club crossed the city to Arsenal Stadium in Highbury, becoming close neighbours of Tottenham Hotspur, and creating the North London derby. In 2006, they moved to the nearby Emirates Stadium. In terms of revenue, Arsenal is the ninth highest-earning football club in the world, earned €487.6m in 2016–17 season.[12] Based on socia
  """
+ */
     }
     
 
