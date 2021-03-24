@@ -609,7 +609,7 @@
                                                     <constraint firstAttribute="width" constant="40" id="5LE-iP-iOo"/>
                                                     <constraint firstAttribute="height" constant="40" id="grM-vl-2xo"/>
                                                 </constraints>
-                                                <state key="normal" title="Button" image="instagramlogo"/>
+                                                <state key="normal" title="Button" image="insta"/>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Arsenal" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NAK-jQ-TcK">
                                                 <rect key="frame" x="8" y="290" width="398" height="42"/>
@@ -696,7 +696,7 @@
                                                     <constraint firstAttribute="height" constant="40" id="NTj-nN-sWC"/>
                                                     <constraint firstAttribute="width" constant="40" id="Rrg-gF-K3H"/>
                                                 </constraints>
-                                                <state key="normal" title="Button" image="facebook"/>
+                                                <state key="normal" title="Button" image="face"/>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zQ2-JB-G5E">
                                                 <rect key="frame" x="16" y="554" width="382" height="1"/>
@@ -731,7 +731,7 @@
                                                     <constraint firstAttribute="width" constant="40" id="1jt-Pp-6cT"/>
                                                     <constraint firstAttribute="height" constant="40" id="xJt-rO-GXk"/>
                                                 </constraints>
-                                                <state key="normal" title="Button" image="twitter-icon"/>
+                                                <state key="normal" title="Button" image="twitter"/>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -801,12 +801,15 @@
                     <connections>
                         <outlet property="countryNameLabel" destination="jKa-3V-VmH" id="WHu-j5-tYO"/>
                         <outlet property="descriptionLabel" destination="ZvP-Q3-BEE" id="5AP-La-5ba"/>
+                        <outlet property="faceBookButton" destination="Tnp-BW-T70" id="6dk-q9-EvO"/>
                         <outlet property="foundedYearLabel" destination="Ng3-Ca-GCo" id="InF-Id-NX4"/>
+                        <outlet property="instagramButton" destination="FvF-sH-hS9" id="cvw-86-Rg4"/>
                         <outlet property="leagueName" destination="rQQ-Tv-91k" id="IiE-YE-VpT"/>
                         <outlet property="stadiumImagView" destination="hOb-fA-Y9Q" id="7Rs-1A-8uS"/>
                         <outlet property="stadiumNameLabel" destination="jve-xt-h3p" id="cLd-Kn-RG6"/>
                         <outlet property="teamLogoImageView" destination="L0b-Cg-cDH" id="PJr-ko-CAo"/>
                         <outlet property="teamNameLabel" destination="NAK-jQ-TcK" id="XmV-TM-xkc"/>
+                        <outlet property="twitterButton" destination="J42-Tc-CIX" id="Fkx-Q5-jmF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SsQ-wv-3rg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -820,11 +823,11 @@
         <image name="arsenalBackGround" width="1280" height="720"/>
         <image name="calendar" width="512" height="512"/>
         <image name="chelsea" width="512" height="512"/>
-        <image name="facebook" width="225" height="225"/>
-        <image name="instagramlogo" width="800" height="800"/>
+        <image name="face" width="190" height="190"/>
+        <image name="insta" width="905" height="905"/>
         <image name="sportscourt.fill" catalog="system" width="128" height="84"/>
         <image name="studemImg" width="1280" height="720"/>
-        <image name="twitter-icon" width="512" height="512"/>
+        <image name="twitter" width="2186" height="2186"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
