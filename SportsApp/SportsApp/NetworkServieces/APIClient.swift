@@ -10,11 +10,7 @@ import Alamofire
 
 class APIClient {
     fileprivate var baseURL = "https://thesportsdb.com/api"
-    
-    
-    
-
-    
+   
     func getSportsFromAPI(endPoint: String,completion:@escaping ((Result< Any,Error>)?) -> Void) {
         let urlString = baseURL + endPoint
         AF.request(urlString).response { (response) in
@@ -33,4 +29,36 @@ class APIClient {
 //            }
         
     }
+    
+//
+//    func getLeaguesFromAPI(endPoint: String,completion:@escaping ((Result< Any,Error>)?) -> Void) {
+//        let urlString = baseURL + endPoint
+//        AF.request(urlString).response { (response) in
+//            guard let data = response.value , response.error == nil else {
+//                completion(.failure(response.error!))
+//                return
+//            }
+//
+//            completion(.success(data!))
+//        }
+//
+//
+//    }
+//
+//    func getLeaguesInfoFromAPI(leagueId: String,completion:@escaping ((Result< Any,Error>)?) -> Void) {
+//        let url="https://www.thesportsdb.com/api/v1/json/1/lookupleague.php?id="
+//        let urlString=url + leagueId
+//        AF.request(urlString).response { (response) in
+//            guard let data = response.value , response.error == nil else {
+//                completion(.failure(response.error!))
+//                return
+//            }
+//
+//            completion(.success(data!))
+//        }
+//
+//
+//    }
+//
+    
 }

@@ -6,19 +6,36 @@
 //
 
 import UIKit
-
+import SDWebImage
 class LeaguesTableViewController: UITableViewController {
 
+    
+    
+    var leaguesViewModel: LeaguesViewModel? {
+        didSet {
+            leaguesViewModel?.callFuncToGetAllLeagues()
+           // leaguesViewModel?.callFuncToGetLeaguesInfo(leagueId: "4328")
+            leaguesViewModel?.getLeagues = {[weak self] viewModel in
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                }
+            }
+            leaguesViewModel?.getLeaguesInfo = {[weak self] viewModel in
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                }
+            }
+        }
+    }
+    
+ 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         //add register
         tableView.register(UINib(nibName: "LeaguesTableViewCell", bundle: nil), forCellReuseIdentifier: String(describing: LeaguesTableViewCell.self))
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        leaguesViewModel=LeaguesViewModel()
     }
 
     // MARK: - Table view data source
@@ -30,7 +47,8 @@ class LeaguesTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 5
+        //sportsViewModel?.sportData?.sports.count ?? 0
+        return leaguesViewModel?.leagueData?.leagues.count ?? 0
     }
 
     
@@ -41,8 +59,11 @@ class LeaguesTableViewController: UITableViewController {
             return UITableViewCell()
         }
         
-        cell.leagueImageView.image=UIImage(named: "PremierLeague2")
+        let leagueId =  leaguesViewModel?.leagueData?.leagues[indexPath.row].leagueId ?? ""
+        leaguesViewModel?.callFuncToGetLeaguesInfo(leagueId: leagueId)
         
+     //cell.leagueImageView.image=UIImage(named: "PremierLeague2")
+        cell.leagueImageView.sd_setImage(with: URL(string: (leaguesViewModel?.leagueInformtions?.leaguesInfo[0].leagueImg)!), placeholderImage: UIImage(named: "PremierLeague2"))
         //make pic circular
         cell.leagueImageView.layer.borderWidth = 1.0
         cell.leagueImageView.layer.masksToBounds = false
@@ -50,7 +71,8 @@ class LeaguesTableViewController: UITableViewController {
         cell.leagueImageView.layer.cornerRadius = cell.leagueImageView.frame.size.width/2
         cell.leagueImageView.clipsToBounds=true
         
-        cell.leagueNameLabel.text="English League 1"
+       // cell.leagueNameLabel.text="English League 1"
+        cell.leagueNameLabel.text=leaguesViewModel?.leagueData?.leagues[indexPath.row].leagueName
         return cell
     }
     
