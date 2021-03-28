@@ -1,87 +1,107 @@
 //
-//  LeaguesViewModel.swift
-//  SportsApp
+///LeaguesViewModel.swift
+// SportsApp
 //
-//  Created by Macbook on 25/03/2021.
+// Created by Mahmoud Morsy on 26/03/2021.
 //
 
 import Foundation
+
 protocol LeaguesProtocol {
+
     func callFuncToGetAllLeagues()
-    func callFuncToGetLeaguesInfo(leagueId:String)
-    var getLeagues: ((LeaguesProtocol)->Void)? {get set}
-    var getLeaguesInfo: ((LeaguesProtocol)->Void)? {get set}
-    var leagueData: League? {get set}//array of leagues
-    var leagueInformtions: leagueInfo? {get set}
+    var getLeagues: ((LeaguesProtocol)->Void)? {get}
+    var leaguesData: AllLeagues? {get set}
+    var selectedSport: AllSports? {get set}
+    func getMoreInfoLeague()
+    var moreInfoArray: leagueInfo? {get set}
+    init (sport: AllSports)
 }
+
 
 class LeaguesViewModel: LeaguesProtocol {
     
-   
-    
-    var getLeaguesInfo: ((LeaguesProtocol) -> Void)?
-    
-    var leagueInformtions: leagueInfo? {
-        didSet{
-            getLeaguesInfo!(self)
-        }
+    required init(sport: AllSports) {
+        self.selectedSport = sport
     }
+    var selectedSport: AllSports?
+
     
     var getLeagues: ((LeaguesProtocol) -> Void)?
     
-    var leagueData: League? {
+    var leaguesData: AllLeagues? {
         didSet {
-                getLeagues!(self)
-              }
+
+        }
     }
-   
-    private let apiService = APIClient()
+    var resultArray: leagueInfo? {
+        didSet{
+            self.moreInfoArray = self.resultArray
+        }
+        
+    }
+    var moreInfoArray: leagueInfo?{
+        didSet {
+            getLeagues!(self)
+        }
+    }
     
+    let apiService = APIClient()
     
     func callFuncToGetAllLeagues() {
-    
-        apiService.getSportsFromAPI(endPoint:"/v1/json/1/all_leagues.php") {[weak self] result in
-            switch result {
+        apiService.fetchData(endPoint: "all_leagues.php", responseClass: AllLeagues.self) {[weak self] (response) in
+            switch response {
+            case .success(let leagues):
+                self?.leaguesData = leagues
+                self?.leaguesData?.leagues = (leagues?.leagues.filter({$0.leagueSportType == self?.selectedSport?.sportName}))!
+                
+                self?.getMoreInfoLeague()
+            
+//                self.sportsView?.fetchingDataSuccess()
+//                self.sportsView?.hideIndicator()
             case .failure(let error):
-                print(error)
-            case .success(let data):
-               // print(data)
-                do {
-                    let decoder = JSONDecoder()
-                    let decodedObject = try decoder.decode(League.self, from: data as! Data)
-                    self?.leagueData = decodedObject
-                 //   print(decodedObject)
-                    
-                }catch {
-                    print(error.localizedDescription)
+                let errorMessage = error.userInfo[NSLocalizedDescriptionKey]! as! String
+                if error.code == -1 {
+//                    self.sportsView?.showInternetMessage(message: errorMessage)
+                }else{
+//                    self.sportsView?.showError(error: errorMessage)
                 }
-            case .none:
-                break
             }
         }
+        
     }
     
-    
-    func callFuncToGetLeaguesInfo(leagueId:String) {
-        apiService.getSportsFromAPI(endPoint:"/v1/json/1/lookupleague.php?id=\(leagueId)") {[weak self] result in
-            switch result {
-            case .failure(let error):
-                print(error)
-            case .success(let data):
-                print(data)
-                do {
-                    let decoder = JSONDecoder()
-                    let decodedObject = try decoder.decode(leagueInfo.self, from: data as! Data)
-                    self?.leagueInformtions = decodedObject
-                    print(decodedObject)
+    func getMoreInfoLeague() {
+        resultArray = leagueInfo(leagues: [])
+        for item in self.leaguesData!.leagues {
+            apiService.fetchData(endPoint: "lookupleague.php?id=\(item.leagueId)", responseClass: leagueInfo.self) {[weak self] (response) in
+
+                switch response {
+                case .success(let data):
+                    self?.resultArray?.leagues.append((data!).leagues[0])
                     
-                }catch {
-                    print(error.localizedDescription)
+
+                case .failure(let error):
+                    let errorMessage = error.userInfo[NSLocalizedDescriptionKey]! as! String
+                    if error.code == -1 {
+    //                    self.sportsView?.showInternetMessage(message: errorMessage)
+                    }else{
+    //                    self.sportsView?.showError(error: errorMessage)
+                    }
                 }
-            case .none:
-                break
+
             }
         }
+        
     }
     
+    func getMatchesViewModel(league: AllLeagueInfo) -> LatestEventsViewModel {
+        return LatestEventsViewModel(league: league)
+    }
+//    
+    func getAllTeamsInLeagueViewModel(league: AllLeagueInfo) -> AllTeamsInLeagueViewModel {
+        return AllTeamsInLeagueViewModel(league: league)
+    }
+    
+
 }

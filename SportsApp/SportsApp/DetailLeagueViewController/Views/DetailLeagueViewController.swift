@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import SDWebImage
+import KRProgressHUD
 
 class DetailLeagueViewController: UIViewController {
 
@@ -15,12 +17,45 @@ class DetailLeagueViewController: UIViewController {
             detailLeagueTableView.dataSource = self
         }
     }
+    
+    
+    var latestViewModel: LatestEventsViewModel? {
+        didSet {
+            KRProgressHUD.show()
+            latestViewModel?.callFuncToGetLatestEvents(leagueId: (latestViewModel?.selectedLeague!.leagueId)!)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+               KRProgressHUD.dismiss()
+            }
+
+            latestViewModel?.getLatestEvents = {[weak self] viewModel in
+                DispatchQueue.main.async {
+                    self?.detailLeagueTableView.reloadData()
+                }
+            }
+        }
+    }
+    
+    var allTeamsInLeagueViewModel: AllTeamsInLeagueViewModel? {
+        didSet {
+            
+            allTeamsInLeagueViewModel?.callAllTeamsInLeague(leagueId: (allTeamsInLeagueViewModel?.selectedLeague!.leagueId)!)
+            
+            allTeamsInLeagueViewModel?.getAllTeamsInLeagueData = {[weak self] viewModel in
+                DispatchQueue.main.async {
+                    self?.detailLeagueTableView.reloadData()
+                }
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
     }
 }
+
 
 extension DetailLeagueViewController: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -35,30 +70,36 @@ extension DetailLeagueViewController: UITableViewDelegate,UITableViewDataSource 
             guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: IntroImageTableViewCell.self)) as? IntroImageTableViewCell else {
                 return UITableViewCell()
             }
+            if let image = self.latestViewModel?.selectedLeague?.leagueImg {
+                cell.introImageView.sd_setImage(with: URL(string: (image)), placeholderImage: UIImage(named: "sports"))
+            }
             return cell
         case 1:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: UpComingEventsTableViewCell.self)) as? UpComingEventsTableViewCell else {
                 return UITableViewCell()
             }
+            
             return cell
         case 2:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: LatestEventsTableViewCell.self)) as? LatestEventsTableViewCell else {
                 return UITableViewCell()
             }
+            cell.latestViewModel = self.latestViewModel
+            
             return cell
         case 3:
             
             guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TeamsTableViewCell.self)) as? TeamsTableViewCell else {
                 return UITableViewCell()
             }
+            cell.allTeamsInLeague = self.allTeamsInLeagueViewModel
+            
             return cell
             
             
         default:
             return UITableViewCell()
         }
-        
-        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

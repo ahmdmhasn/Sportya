@@ -7,35 +7,33 @@
 
 import UIKit
 import SDWebImage
-class LeaguesTableViewController: UITableViewController {
+import KRProgressHUD
 
-    
-    
+class LeaguesTableViewController: UITableViewController {
+   
     var leaguesViewModel: LeaguesViewModel? {
         didSet {
+            KRProgressHUD.show()
             leaguesViewModel?.callFuncToGetAllLeagues()
-           // leaguesViewModel?.callFuncToGetLeaguesInfo(leagueId: "4328")
-            leaguesViewModel?.getLeagues = {[weak self] viewModel in
-                DispatchQueue.main.async {
-                    self?.tableView.reloadData()
-                }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+               KRProgressHUD.dismiss()
             }
-            leaguesViewModel?.getLeaguesInfo = {[weak self] viewModel in
+            
+            leaguesViewModel?.getLeagues = {[weak self] viewModel in
                 DispatchQueue.main.async {
                     self?.tableView.reloadData()
                 }
             }
         }
     }
-    
- 
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         //add register
         tableView.register(UINib(nibName: "LeaguesTableViewCell", bundle: nil), forCellReuseIdentifier: String(describing: LeaguesTableViewCell.self))
-        leaguesViewModel=LeaguesViewModel()
+       
     }
 
     // MARK: - Table view data source
@@ -47,8 +45,7 @@ class LeaguesTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        //sportsViewModel?.sportData?.sports.count ?? 0
-        return leaguesViewModel?.leagueData?.leagues.count ?? 0
+        return leaguesViewModel?.moreInfoArray?.leagues.count ?? 0
     }
 
     
@@ -59,11 +56,12 @@ class LeaguesTableViewController: UITableViewController {
             return UITableViewCell()
         }
         
-        let leagueId =  leaguesViewModel?.leagueData?.leagues[indexPath.row].leagueId ?? ""
-        leaguesViewModel?.callFuncToGetLeaguesInfo(leagueId: leagueId)
+        cell.leagueNameLabel.text = leaguesViewModel?.moreInfoArray?.leagues[indexPath.row].leagueName
         
-     //cell.leagueImageView.image=UIImage(named: "PremierLeague2")
-        cell.leagueImageView.sd_setImage(with: URL(string: (leaguesViewModel?.leagueInformtions?.leaguesInfo[0].leagueImg)!), placeholderImage: UIImage(named: "PremierLeague2"))
+        if let image = self.leaguesViewModel?.moreInfoArray?.leagues[indexPath.row].leagueImg {
+            cell.leagueImageView.sd_setImage(with: URL(string: (image)), placeholderImage: UIImage(named: "sports"))
+        }
+        
         //make pic circular
         cell.leagueImageView.layer.borderWidth = 1.0
         cell.leagueImageView.layer.masksToBounds = false
@@ -71,15 +69,28 @@ class LeaguesTableViewController: UITableViewController {
         cell.leagueImageView.layer.cornerRadius = cell.leagueImageView.frame.size.width/2
         cell.leagueImageView.clipsToBounds=true
         
-       // cell.leagueNameLabel.text="English League 1"
-        cell.leagueNameLabel.text=leaguesViewModel?.leagueData?.leagues[indexPath.row].leagueName
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let detailLeagueViewController = self.storyboard?.instantiateViewController(identifier: String(describing: DetailLeagueViewController.self)) as? DetailLeagueViewController else {
+            return
+        }
+        
+
+        detailLeagueViewController.latestViewModel = self.leaguesViewModel?.getMatchesViewModel(league: (leaguesViewModel?.moreInfoArray?.leagues[indexPath.row])!)
+        
+        detailLeagueViewController.allTeamsInLeagueViewModel = self.leaguesViewModel?.getAllTeamsInLeagueViewModel(league: (leaguesViewModel?.moreInfoArray?.leagues[indexPath.row])!)
+        
+        
+
+        self.navigationController?.pushViewController(detailLeagueViewController, animated: true)
+    }
+    
+    
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
-
-
-
+    
 }

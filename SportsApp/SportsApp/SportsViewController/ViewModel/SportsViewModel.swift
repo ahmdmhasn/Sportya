@@ -11,10 +11,15 @@ protocol SportsProtocol {
     func callFuncToGetAllSports()
     var getSports: ((SportsProtocol)->Void)? {get set}
     var sportData: Sport? {get set}
+   
+    
 }
 
 class SportsViewModel: SportsProtocol {
     
+    func getLeaguesViewModel(for index: Int) -> LeaguesViewModel {
+        return LeaguesViewModel(sport: (sportData?.sports[index])!)
+    }
     
     private let apiService = APIClient()
     
@@ -27,25 +32,24 @@ class SportsViewModel: SportsProtocol {
     }
     
     func callFuncToGetAllSports() {
-        apiService.getSportsFromAPI(endPoint:"/v1/json/1/all_sports.php") {[weak self] result in
-            switch result {
+        apiService.fetchData(endPoint: "all_sports.php", responseClass: Sport.self) {[weak self] (response) in
+            switch response {
+            case .success(let sports):
+                self?.sportData = sports
+                
+                
+//                self.sportsView?.fetchingDataSuccess()
+//                self.sportsView?.hideIndicator()
             case .failure(let error):
-                print(error)
-            case .success(let data):
-                print(data)
-                do {
-                    let decoder = JSONDecoder()
-                    let decodedObject = try decoder.decode(Sport.self, from: data as! Data)
-                    self?.sportData = decodedObject
-                    print(decodedObject)
-                    
-                }catch {
-                    print(error.localizedDescription)
+                let errorMessage = error.userInfo[NSLocalizedDescriptionKey]! as! String
+                if error.code == -1 {
+//                    self.sportsView?.showInternetMessage(message: errorMessage)
+                }else{
+//                    self.sportsView?.showError(error: errorMessage)
                 }
-            case .none:
-                break
             }
         }
+
     }
     
     

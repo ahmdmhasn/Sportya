@@ -20,18 +20,21 @@ class TeamDetailsViewController: UIViewController {
     @IBOutlet weak var teamNameLabel: UILabel!
     @IBOutlet weak var teamLogoImageView: UIImageView!
     @IBOutlet weak var stadiumImagView: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         teamLogoImageView.image=UIImage(named: "teamLogo")
         stadiumImagView.image=UIImage(named: "studemImg")
-       teamNameLabel.text="Arsenal"
+        teamNameLabel.text="Arsenal"
         leagueName.text="English Primer League"
         countryNameLabel.text="England"
         foundedYearLabel.text="1892"
         stadiumNameLabel.text="Emiartes stadium"
         
     }
+    
+    
     
 
 }

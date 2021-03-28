@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class TeamsTableViewCell: UITableViewCell {
 
@@ -13,6 +14,14 @@ class TeamsTableViewCell: UITableViewCell {
         didSet {
             teamsCollectionView.delegate = self
             teamsCollectionView.dataSource = self
+        }
+    }
+    
+    var allTeamsInLeague: AllTeamsInLeagueViewModel? {
+        didSet {
+            DispatchQueue.main.async {
+                self.teamsCollectionView.reloadData()
+            }
         }
     }
     
@@ -31,7 +40,7 @@ class TeamsTableViewCell: UITableViewCell {
 
 extension TeamsTableViewCell: UICollectionViewDelegate,UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return allTeamsInLeague?.teamDetailData?.teams.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -39,6 +48,10 @@ extension TeamsTableViewCell: UICollectionViewDelegate,UICollectionViewDataSourc
             return UICollectionViewCell()
         }
         
+        if let image = self.allTeamsInLeague?.teamDetailData?.teams[indexPath.row].imgURL {
+            cell.teamImage.sd_setImage(with: URL(string: (image)), placeholderImage: UIImage(named: "sports"))
+        }
+
         
         cell.contentView.layer.borderWidth = 3
         cell.contentView.layer.masksToBounds = false
@@ -46,5 +59,9 @@ extension TeamsTableViewCell: UICollectionViewDelegate,UICollectionViewDataSourc
         cell.contentView.layer.cornerRadius = cell.teamImage.frame.size.width / 2
         cell.contentView.clipsToBounds = true
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
     }
 }

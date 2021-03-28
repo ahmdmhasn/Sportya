@@ -6,9 +6,20 @@
 //
 
 import UIKit
+import SDWebImage
+import KRProgressHUD
 
 class LatestEventsTableViewCell: UITableViewCell {
-
+    
+    var latestViewModel: LatestEventsViewModel? {
+        didSet {
+            DispatchQueue.main.async {
+                self.latestEventCollectionView.reloadData()
+            }
+            
+        }
+    }
+    
     @IBOutlet weak var latestEventCollectionView: UICollectionView! {
         didSet {
             latestEventCollectionView.delegate = self
@@ -29,13 +40,16 @@ class LatestEventsTableViewCell: UITableViewCell {
 
 extension LatestEventsTableViewCell: UICollectionViewDelegate,UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return latestViewModel?.latestEventsData?.events.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = latestEventCollectionView.dequeueReusableCell(withReuseIdentifier: String(describing: LatestEventsCollectionViewCell.self) , for: indexPath) as? LatestEventsCollectionViewCell else {
             return UICollectionViewCell()
         }
+        cell.dateLabel.text = latestViewModel?.latestEventsData?.events[indexPath.row].dateEvent
+        cell.homeTeamScoreLabel.text = latestViewModel?.latestEventsData?.events[indexPath.row].scoreHomeTeam
+        cell.awayTeamScoreLabel.text = latestViewModel?.latestEventsData?.events[indexPath.row].scoreAwayTeam
         
         cell.contentView.layer.cornerRadius = 10
         cell.contentView.layer.borderWidth = 2

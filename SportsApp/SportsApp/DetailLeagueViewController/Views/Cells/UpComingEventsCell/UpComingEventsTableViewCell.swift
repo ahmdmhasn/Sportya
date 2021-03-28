@@ -40,6 +40,8 @@ extension UpComingEventsTableViewCell: UICollectionViewDelegate, UICollectionVie
             return UICollectionViewCell()
         }
         
+        
+        
         cell.contentView.layer.cornerRadius = 10
         cell.contentView.layer.borderWidth = 2
         cell.contentView.layer.borderColor = UIColor.gray.cgColor

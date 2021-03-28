@@ -51,8 +51,10 @@ extension SportsViewController: UICollectionViewDelegate,UICollectionViewDataSou
         }
         
         cell.sportName.text = sportsViewModel?.sportData?.sports[indexPath.row].sportName
-        cell.sportImage.sd_setImage(with: URL(string: (sportsViewModel?.sportData?.sports[indexPath.row].sportImage)!), placeholderImage: UIImage(named: "sports"))
         
+        if let image = sportsViewModel?.sportData?.sports[indexPath.row].sportImage {
+            cell.sportImage.sd_setImage(with: URL(string: (image)), placeholderImage: UIImage(named: "sports"))
+        }
         
         return cell
     }
@@ -61,6 +63,11 @@ extension SportsViewController: UICollectionViewDelegate,UICollectionViewDataSou
         guard let leaguesViewController = self.storyboard?.instantiateViewController(identifier: String(describing: LeaguesTableViewController.self)) as? LeaguesTableViewController else {
             return
         }
+        
+
+        leaguesViewController.leaguesViewModel = self.sportsViewModel?.getLeaguesViewModel(for: indexPath.row)
+        
+
         self.navigationController?.pushViewController(leaguesViewController, animated: true)
     }
     

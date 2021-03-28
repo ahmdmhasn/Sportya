@@ -339,7 +339,7 @@
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Rvg-gF-pwK">
                                                     <rect key="frame" x="16" y="55" width="382" height="156"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="0Oj-cs-Kk1">
+                                                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="0Oj-cs-Kk1">
                                                         <size key="itemSize" width="284" height="152"/>
                                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -347,7 +347,7 @@
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="LatestEventsCollectionViewCell" id="Qqb-BU-Dek" customClass="LatestEventsCollectionViewCell" customModule="SportsApp" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="2" width="284" height="152"/>
+                                                            <rect key="frame" x="49" y="0.0" width="284" height="152"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ybD-1i-J0y">
                                                                 <rect key="frame" x="0.0" y="0.0" width="284" height="152"/>

@@ -8,35 +8,41 @@
 import Foundation
 
 
-struct League :Codable{
-    var leagues :[AllLeagues]
+struct leagueInfo : Codable{
+    var leagues : [AllLeagueInfo]
 }
 
-
-struct AllLeagues :Codable{
+struct AllLeagueInfo : Codable{
+    var leagueImg :String
+    var leagueYoutubeUrl :String
     var leagueId: String
-    var  leagueName :String
+    var leagueName :String
+    var leagueSportType :String
+
+
+    enum CodingKeys: String, CodingKey {
+        case leagueImg = "strBadge"
+        case leagueYoutubeUrl = "strYoutube"
+        case leagueId = "idLeague"
+        case leagueName = "strLeague"
+        case leagueSportType = "strSport"
+    }
+}
+
+struct AllLeagues: Codable {
+    var leagues: [League]
+}
+
+struct League: Codable {
+    var leagueId: String
+    var leagueName :String
     var leagueSportType :String
     
     enum CodingKeys: String, CodingKey {
         case leagueId = "idLeague"
         case leagueName = "strLeague"
         case leagueSportType = "strSport"
-       
     }
 }
 
-struct leagueInfo : Codable{
-    var leaguesInfo : [AllLeagueInfo]
-}
 
-struct AllLeagueInfo : Codable{
-    var leagueImg :String
-    var leagueYoutubeUrl :String
-    
-    enum CodingKeys: String, CodingKey {
-        case leagueImg = "strBadge"
-        case leagueYoutubeUrl = "strYoutube"
-       
-    }
-}
