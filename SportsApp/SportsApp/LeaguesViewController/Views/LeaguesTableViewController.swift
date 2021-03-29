@@ -81,7 +81,8 @@ class LeaguesTableViewController: UITableViewController {
         detailLeagueViewController.latestViewModel = self.leaguesViewModel?.getMatchesViewModel(league: (leaguesViewModel?.moreInfoArray?.leagues[indexPath.row])!)
         
         detailLeagueViewController.allTeamsInLeagueViewModel = self.leaguesViewModel?.getAllTeamsInLeagueViewModel(league: (leaguesViewModel?.moreInfoArray?.leagues[indexPath.row])!)
-        print(leaguesViewModel?.moreInfoArray?.leagues[indexPath.row])
+        
+        
         
         
 

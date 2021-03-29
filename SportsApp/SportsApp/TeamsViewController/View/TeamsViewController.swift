@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class TeamDetailsViewController: UIViewController {
     @IBOutlet weak var faceBookButton: UIButton!
@@ -21,20 +22,40 @@ class TeamDetailsViewController: UIViewController {
     @IBOutlet weak var teamLogoImageView: UIImageView!
     @IBOutlet weak var stadiumImagView: UIImageView!
     
+    @IBOutlet weak var backGroundImage: UIImageView!
+    var teamsViewModel: TeamsViewModel? {
+        didSet {
+            teamsViewModel?.callFuncToGetTeamDetail(teamId: (teamsViewModel?.selectedTeam?.teamId)!)
+            
+            teamsViewModel?.getTeamDetail = {[weak self] vm in
+                
+                self?.teamNameLabel.text = self?.teamsViewModel?.selectedTeam?.teamName
+                self?.leagueName.text = self?.teamsViewModel?.selectedTeam?.league
+                self?.countryNameLabel.text = self?.teamsViewModel?.selectedTeam?.country
+                self?.foundedYearLabel.text = self?.teamsViewModel?.selectedTeam?.birthYear
+                self?.stadiumNameLabel.text = self?.teamsViewModel?.selectedTeam?.stadiumName
+                self?.descriptionLabel.text = self?.teamsViewModel?.selectedTeam?.description
+                
+                if let image = self?.teamsViewModel?.selectedTeam?.stadiumImgURL {
+                    self?.stadiumImagView.sd_setImage(with: URL(string: (image)), placeholderImage: UIImage(named: "sports"))
+                }
+                if let image = self?.teamsViewModel?.selectedTeam?.imgURL {
+                    self?.teamLogoImageView.sd_setImage(with: URL(string: (image)), placeholderImage: UIImage(named: "sports"))
+                }
+                
+                if let image = self?.teamsViewModel?.selectedTeam?.teamBanner {
+                    self?.backGroundImage.sd_setImage(with: URL(string: (image)), placeholderImage: UIImage(named: "sports"))
+                }
+                
+                
+            }
+            
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        teamLogoImageView.image=UIImage(named: "teamLogo")
-        stadiumImagView.image=UIImage(named: "studemImg")
-        teamNameLabel.text="Arsenal"
-        leagueName.text="English Primer League"
-        countryNameLabel.text="England"
-        foundedYearLabel.text="1892"
-        stadiumNameLabel.text="Emiartes stadium"
         
     }
-    
-    
-    
-
 }

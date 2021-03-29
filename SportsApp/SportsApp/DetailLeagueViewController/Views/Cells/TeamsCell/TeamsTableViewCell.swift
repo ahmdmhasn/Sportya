@@ -8,7 +8,13 @@
 import UIKit
 import SDWebImage
 
+protocol CollectionCellDelegate: class {
+    func selectedItem(team: Team)
+}
+
 class TeamsTableViewCell: UITableViewCell {
+    
+    weak var delegate: CollectionCellDelegate?
 
     @IBOutlet weak var teamsCollectionView: UICollectionView! {
         didSet {
@@ -62,6 +68,7 @@ extension TeamsTableViewCell: UICollectionViewDelegate,UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        self.delegate?.selectedItem(team: (self.allTeamsInLeague?.teamDetailData?.teams[indexPath.row])!)
     }
 }
+

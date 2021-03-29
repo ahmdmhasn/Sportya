@@ -587,7 +587,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p1X-9i-r2F">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="1600"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.14999999999999999" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arsenalBackGround" translatesAutoresizingMaskIntoConstraints="NO" id="If9-jL-ulJ">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arsenalBackGround" translatesAutoresizingMaskIntoConstraints="NO" id="If9-jL-ulJ">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                             </imageView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="studemImg" translatesAutoresizingMaskIntoConstraints="NO" id="hOb-fA-Y9Q">
@@ -732,7 +732,6 @@
                                             <constraint firstItem="L0b-Cg-cDH" firstAttribute="leading" secondItem="p1X-9i-r2F" secondAttribute="leading" constant="132" id="0aF-Uw-s0x"/>
                                             <constraint firstAttribute="trailing" secondItem="JCC-rn-oq5" secondAttribute="trailing" constant="8" id="1KC-0f-GfD"/>
                                             <constraint firstItem="ZvP-Q3-BEE" firstAttribute="leading" secondItem="p1X-9i-r2F" secondAttribute="leading" constant="16" id="3wR-yU-Vy2"/>
-                                            <constraint firstItem="ZvP-Q3-BEE" firstAttribute="top" secondItem="JCC-rn-oq5" secondAttribute="bottom" constant="16" id="6sF-jX-bEs"/>
                                             <constraint firstItem="6fe-er-dKd" firstAttribute="top" secondItem="NAK-jQ-TcK" secondAttribute="bottom" constant="16" id="7Kz-F3-F1N"/>
                                             <constraint firstItem="JCC-rn-oq5" firstAttribute="top" secondItem="6fe-er-dKd" secondAttribute="bottom" constant="32" id="7sF-g8-1fE"/>
                                             <constraint firstAttribute="height" constant="1600" id="8jh-6E-ziy"/>
@@ -789,6 +788,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backGroundImage" destination="If9-jL-ulJ" id="HGU-fo-ZzD"/>
                         <outlet property="countryNameLabel" destination="jKa-3V-VmH" id="WHu-j5-tYO"/>
                         <outlet property="descriptionLabel" destination="ZvP-Q3-BEE" id="5AP-La-5ba"/>
                         <outlet property="faceBookButton" destination="Tnp-BW-T70" id="6dk-q9-EvO"/>

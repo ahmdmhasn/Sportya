@@ -93,6 +93,7 @@ extension DetailLeagueViewController: UITableViewDelegate,UITableViewDataSource 
                 return UITableViewCell()
             }
             cell.allTeamsInLeague = self.allTeamsInLeagueViewModel
+            cell.delegate = self
             
             return cell
             
@@ -116,6 +117,23 @@ extension DetailLeagueViewController: UITableViewDelegate,UITableViewDataSource 
         default:
             return 100
         }
+    }
+    
+    
+}
+
+extension DetailLeagueViewController: CollectionCellDelegate {
+    
+    func selectedItem(team: Team) {
+        
+        guard let teamDetailsViewController = self.storyboard?.instantiateViewController(identifier: String(describing: TeamDetailsViewController.self)) as? TeamDetailsViewController else {
+            return
+        }
+        
+        teamDetailsViewController.teamsViewModel = self.allTeamsInLeagueViewModel?.getSelectedTeam(team: team)
+        
+
+        self.navigationController?.pushViewController(teamDetailsViewController, animated: true)
     }
     
     

@@ -98,7 +98,7 @@ class LeaguesViewModel: LeaguesProtocol {
     func getMatchesViewModel(league: AllLeagueInfo) -> LatestEventsViewModel {
         return LatestEventsViewModel(league: league)
     }
-//    
+   
     func getAllTeamsInLeagueViewModel(league: AllLeagueInfo) -> AllTeamsInLeagueViewModel {
         return AllTeamsInLeagueViewModel(league: league)
     }

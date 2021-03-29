@@ -19,12 +19,17 @@
                     <view alpha="0.25" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KOw-DG-s8H">
                         <rect key="frame" x="0.0" y="0.0" width="246" height="260"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="sports" translatesAutoresizingMaskIntoConstraints="NO" id="9Hn-aM-JCC">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sports" translatesAutoresizingMaskIntoConstraints="NO" id="9Hn-aM-JCC">
                                 <rect key="frame" x="0.0" y="0.0" width="246" height="260"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="9Hn-aM-JCC" firstAttribute="height" secondItem="KOw-DG-s8H" secondAttribute="height" id="KTv-aj-Cb5"/>
+                            <constraint firstItem="9Hn-aM-JCC" firstAttribute="width" secondItem="KOw-DG-s8H" secondAttribute="width" id="LA1-ar-1p4"/>
+                            <constraint firstItem="9Hn-aM-JCC" firstAttribute="centerX" secondItem="KOw-DG-s8H" secondAttribute="centerX" id="NhR-nq-j33"/>
+                            <constraint firstItem="9Hn-aM-JCC" firstAttribute="centerY" secondItem="KOw-DG-s8H" secondAttribute="centerY" id="RyU-It-4bI"/>
+                        </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Soccer" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RDi-Up-8fW">
                         <rect key="frame" x="16" y="16" width="214" height="228"/>

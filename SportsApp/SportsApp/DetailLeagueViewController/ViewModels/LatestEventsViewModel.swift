@@ -14,14 +14,18 @@ protocol LatestEventsProtocol {
     var getLatestEvents: ((LatestEventsProtocol) -> Void)? {get}
     var latestEventsData: LatestEvents? {get set}
     var selectedLeague: AllLeagueInfo? {get set}
+    var twoTeams: [[Team]]? {get set}
 }
 
 
 
 class LatestEventsViewModel: LatestEventsProtocol {
     
+    var twoTeams: [[Team]]?
+    
     required init(league: AllLeagueInfo) {
         self.selectedLeague = league
+        
     }
     var apiService = APIClient()
     
@@ -58,5 +62,13 @@ class LatestEventsViewModel: LatestEventsProtocol {
     
     var selectedLeague: AllLeagueInfo?
     
-    
+    func getTeamsForLatestMatches(teams: Teams) {
+        twoTeams = []
+        for item in (latestEventsData?.events)! {
+            twoTeams?.append([teams.teams.filter({$0.teamId == item.homeTeamId})[0],
+                              teams.teams.filter({$0.teamId == item.awayTeamId})[0]
+                             ])
+            print(twoTeams)
+        }
+    }
 }

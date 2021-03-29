@@ -54,6 +54,10 @@ class AllTeamsInLeagueViewModel: AllTeamsInLeagueProtocol {
         }
     }
     var selectedLeague: AllLeagueInfo?
+    
+    func getSelectedTeam(team: Team) -> TeamsViewModel {
+        return TeamsViewModel(team: team)
+    }
 
     
 }

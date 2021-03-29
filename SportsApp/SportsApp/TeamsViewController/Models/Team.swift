@@ -26,6 +26,7 @@ struct Team: Codable {
     var country: String?
     var imgURL: String?
     var eventImgUrl: String?
+    var teamBanner: String?
     
     enum CodingKeys: String, CodingKey {
         case teamId = "idTeam"
@@ -41,5 +42,6 @@ struct Team: Codable {
         case description = "strDescriptionEN"
         case country = "strCountry"
         case imgURL = "strTeamBadge"
+        case teamBanner = "strTeamBanner"
     }
 }

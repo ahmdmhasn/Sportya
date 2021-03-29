@@ -23,11 +23,11 @@ class TeamsViewModel: TeamsProtocol {
     let apiService = APIClient()
     
     func callFuncToGetTeamDetail(teamId: String) {
-        apiService.fetchData(endPoint: "", responseClass: Teams.self) {[weak self] (response) in
+        apiService.fetchData(endPoint: "lookupteam.php?id=\(teamId)", responseClass: Teams.self) {[weak self] (response) in
             switch response {
             case .success(let teamDetail):
                 self?.teamDetailData = teamDetail
-                print(teamDetail)
+//                print(teamDetail)
                 
             
 //                self.sportsView?.fetchingDataSuccess()
