@@ -13,7 +13,6 @@ class LeaguesTableViewController: UITableViewController {
    
     var leaguesViewModel: LeaguesViewModel? {
         didSet {
-            
             leaguesViewModel?.callFuncToGetAllLeagues(completionHandler: {(isFinished) in
                 if !isFinished {
                     KRProgressHUD.show()
@@ -65,6 +64,8 @@ class LeaguesTableViewController: UITableViewController {
             cell.leagueImageView.sd_setImage(with: URL(string: (image)), placeholderImage: UIImage(named: "sports"))
         }
         
+        cell.youTubeDelgate = self
+        
         //make pic circular
         cell.leagueImageView.layer.borderWidth = 1.0
         cell.leagueImageView.layer.masksToBounds = false
@@ -96,5 +97,20 @@ class LeaguesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
+    
+}
+
+extension LeaguesTableViewController: YouTubeDelegate {
+    func didPressYouTubeButton(cell: LeaguesTableViewCell) {
+        guard let indexPath = self.tableView.indexPath(for: cell) else {return}
+        
+        guard let webSiteUrl = URL(string: "https://\(leaguesViewModel?.moreInfoArray?.leagues[indexPath.row].leagueYoutubeUrl ?? "")") else {return}
+        if UIApplication.shared.canOpenURL(webSiteUrl) {
+           UIApplication.shared.open(webSiteUrl, options: [:])
+        }
+    }
+    
+    
+    
     
 }

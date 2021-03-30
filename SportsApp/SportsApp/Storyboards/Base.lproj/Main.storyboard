@@ -618,7 +618,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="1600"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="If9-jL-ulJ">
-                                                <rect key="frame" x="0.0" y="518" width="414" height="896"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                             </imageView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hOb-fA-Y9Q">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
@@ -741,6 +741,9 @@
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kmn-rI-Gcc">
                                                                 <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                                                 <state key="normal" image="webSite"/>
+                                                                <connections>
+                                                                    <action selector="webSite2Tapped:" destination="JcL-Qj-pRC" eventType="touchUpInside" id="hJI-S6-yyv"/>
+                                                                </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tnp-BW-T70">
                                                                 <rect key="frame" x="0.0" y="56" width="40" height="40"/>
@@ -749,6 +752,9 @@
                                                                     <constraint firstAttribute="width" constant="40" id="Rrg-gF-K3H"/>
                                                                 </constraints>
                                                                 <state key="normal" title="Button" image="face"/>
+                                                                <connections>
+                                                                    <action selector="faceBook1Tapped:" destination="JcL-Qj-pRC" eventType="touchUpInside" id="Eqm-kn-KWZ"/>
+                                                                </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FvF-sH-hS9">
                                                                 <rect key="frame" x="0.0" y="112" width="40" height="40"/>
@@ -757,6 +763,9 @@
                                                                     <constraint firstAttribute="height" constant="40" id="grM-vl-2xo"/>
                                                                 </constraints>
                                                                 <state key="normal" title="Button" image="insta"/>
+                                                                <connections>
+                                                                    <action selector="instagram1Tapped:" destination="JcL-Qj-pRC" eventType="touchUpInside" id="G00-wp-Q4i"/>
+                                                                </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J42-Tc-CIX">
                                                                 <rect key="frame" x="0.0" y="168" width="40" height="40"/>
@@ -765,6 +774,9 @@
                                                                     <constraint firstAttribute="height" constant="40" id="xJt-rO-GXk"/>
                                                                 </constraints>
                                                                 <state key="normal" title="Button" image="twitter"/>
+                                                                <connections>
+                                                                    <action selector="twitter1Tapped:" destination="JcL-Qj-pRC" eventType="touchUpInside" id="2Qe-aG-LRh"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                     </stackView>
@@ -774,26 +786,38 @@
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZXE-ym-LlX">
                                                                 <rect key="frame" x="0.0" y="0.0" width="302" height="40"/>
                                                                 <state key="normal" title="www.arsenal.com">
-                                                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <color key="titleColor" red="0.14117647059999999" green="0.28627450980000002" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 </state>
+                                                                <connections>
+                                                                    <action selector="webSite1Tapped:" destination="JcL-Qj-pRC" eventType="touchUpInside" id="dHf-Kz-axS"/>
+                                                                </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FNE-I8-K5s">
                                                                 <rect key="frame" x="0.0" y="56" width="302" height="40"/>
                                                                 <state key="normal" title="www.facebook.com">
                                                                     <color key="titleColor" systemColor="linkColor"/>
                                                                 </state>
+                                                                <connections>
+                                                                    <action selector="faceBook2Tapped:" destination="JcL-Qj-pRC" eventType="touchUpInside" id="SdO-RZ-6zu"/>
+                                                                </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NgW-b5-Qwj">
                                                                 <rect key="frame" x="0.0" y="112" width="302" height="40"/>
                                                                 <state key="normal" title="www.instagram.com">
                                                                     <color key="titleColor" red="0.8725619912" green="0.35884001850000002" blue="0.20778483149999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 </state>
+                                                                <connections>
+                                                                    <action selector="instagram2Tapped:" destination="JcL-Qj-pRC" eventType="touchUpInside" id="gMk-6F-L8V"/>
+                                                                </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="748" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NbH-aL-cTP">
                                                                 <rect key="frame" x="0.0" y="168" width="302" height="40"/>
                                                                 <state key="normal" title="www.twitter.com">
                                                                     <color key="titleColor" systemColor="systemTealColor"/>
                                                                 </state>
+                                                                <connections>
+                                                                    <action selector="twittrt2Tapped:" destination="JcL-Qj-pRC" eventType="touchUpInside" id="reS-Gs-bOE"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                     </stackView>
@@ -815,7 +839,6 @@
                                             <constraint firstItem="L0b-Cg-cDH" firstAttribute="leading" secondItem="p1X-9i-r2F" secondAttribute="leading" constant="132" id="0aF-Uw-s0x"/>
                                             <constraint firstAttribute="trailing" secondItem="JCC-rn-oq5" secondAttribute="trailing" constant="8" id="1KC-0f-GfD"/>
                                             <constraint firstItem="ZvP-Q3-BEE" firstAttribute="leading" secondItem="p1X-9i-r2F" secondAttribute="leading" constant="16" id="3wR-yU-Vy2"/>
-                                            <constraint firstItem="6fe-er-dKd" firstAttribute="top" secondItem="NAK-jQ-TcK" secondAttribute="bottom" constant="16" id="7Kz-F3-F1N"/>
                                             <constraint firstItem="JCC-rn-oq5" firstAttribute="top" secondItem="6fe-er-dKd" secondAttribute="bottom" constant="32" id="7sF-g8-1fE"/>
                                             <constraint firstAttribute="height" constant="1600" id="8jh-6E-ziy"/>
                                             <constraint firstItem="L0b-Cg-cDH" firstAttribute="top" secondItem="p1X-9i-r2F" secondAttribute="top" constant="124" id="Az5-gD-jSi"/>
@@ -825,7 +848,6 @@
                                             <constraint firstItem="6fe-er-dKd" firstAttribute="top" secondItem="NAK-jQ-TcK" secondAttribute="bottom" constant="16" id="IgK-PO-Cqw"/>
                                             <constraint firstAttribute="trailing" secondItem="6fe-er-dKd" secondAttribute="trailing" constant="16" id="L18-rQ-its"/>
                                             <constraint firstItem="zQ2-JB-G5E" firstAttribute="top" secondItem="6fe-er-dKd" secondAttribute="bottom" constant="8" id="MnE-yd-INP"/>
-                                            <constraint firstItem="NAK-jQ-TcK" firstAttribute="top" secondItem="L0b-Cg-cDH" secondAttribute="bottom" constant="16" id="Vdo-Wf-01v"/>
                                             <constraint firstAttribute="trailing" secondItem="hOb-fA-Y9Q" secondAttribute="trailing" id="Xax-mR-iT5"/>
                                             <constraint firstItem="hOb-fA-Y9Q" firstAttribute="top" secondItem="p1X-9i-r2F" secondAttribute="top" id="Y0A-kO-GNv"/>
                                             <constraint firstAttribute="trailing" secondItem="zQ2-JB-G5E" secondAttribute="trailing" constant="16" id="YGP-vT-AXY"/>
@@ -873,14 +895,18 @@
                         <outlet property="countryNameLabel" destination="jKa-3V-VmH" id="WHu-j5-tYO"/>
                         <outlet property="descriptionLabel" destination="ZvP-Q3-BEE" id="5AP-La-5ba"/>
                         <outlet property="faceBookButton" destination="Tnp-BW-T70" id="6dk-q9-EvO"/>
+                        <outlet property="faceBookButtonFull" destination="FNE-I8-K5s" id="fMA-Ic-upd"/>
                         <outlet property="foundedYearLabel" destination="Ng3-Ca-GCo" id="InF-Id-NX4"/>
                         <outlet property="instagramButton" destination="FvF-sH-hS9" id="cvw-86-Rg4"/>
+                        <outlet property="instagramButtonFull" destination="NgW-b5-Qwj" id="mjD-CV-cfZ"/>
                         <outlet property="leagueName" destination="rQQ-Tv-91k" id="IiE-YE-VpT"/>
                         <outlet property="stadiumImagView" destination="hOb-fA-Y9Q" id="7Rs-1A-8uS"/>
                         <outlet property="stadiumNameLabel" destination="jve-xt-h3p" id="cLd-Kn-RG6"/>
                         <outlet property="teamLogoImageView" destination="L0b-Cg-cDH" id="PJr-ko-CAo"/>
                         <outlet property="teamNameLabel" destination="NAK-jQ-TcK" id="XmV-TM-xkc"/>
                         <outlet property="twitterButton" destination="J42-Tc-CIX" id="Fkx-Q5-jmF"/>
+                        <outlet property="twitterButtonFull" destination="NbH-aL-cTP" id="YiR-6w-sdq"/>
+                        <outlet property="webSiteButton" destination="ZXE-ym-LlX" id="EEV-WI-nlD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SsQ-wv-3rg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
