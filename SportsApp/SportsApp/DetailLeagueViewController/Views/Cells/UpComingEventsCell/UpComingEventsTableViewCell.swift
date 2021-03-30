@@ -16,6 +16,23 @@ class UpComingEventsTableViewCell: UITableViewCell {
         }
     }
     
+    var latestViewModel: LatestEventsViewModel? {
+        didSet {
+            DispatchQueue.main.async {
+                self.upComingCollectionView.reloadData()
+            }
+            
+        }
+    }
+    
+    var allTeamsInLeague: AllTeamsInLeagueViewModel? {
+        didSet{
+            DispatchQueue.main.async {
+                self.upComingCollectionView.reloadData()
+            }
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -32,7 +49,7 @@ class UpComingEventsTableViewCell: UITableViewCell {
 
 extension UpComingEventsTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+         return latestViewModel?.latestEventsData?.events?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -40,8 +57,19 @@ extension UpComingEventsTableViewCell: UICollectionViewDelegate, UICollectionVie
             return UICollectionViewCell()
         }
         
+        if allTeamsInLeague != nil && allTeamsInLeague?.twoTeams != nil && (allTeamsInLeague?.twoTeams!.count)! > 0 {
+            cell.homeTeamImage.sd_setImage(with: URL(string: (allTeamsInLeague?.twoTeams?[indexPath.row][0].imgURL ?? "")), placeholderImage: UIImage(named: "sports"))
+            
+            cell.awayTeamImage.sd_setImage(with: URL(string: (allTeamsInLeague?.twoTeams?[indexPath.row][1].imgURL) ?? ""), placeholderImage: UIImage(named: "sports"))
+            
+        }
         
-        
+        cell.homeTeamLabel.text = latestViewModel?.latestEventsData?.events?[indexPath.row].homeTeam
+        cell.awayTeamLabel.text = latestViewModel?.latestEventsData?.events?[indexPath.row].awayTeam
+                
+        cell.dateDay.text = latestViewModel?.latestEventsData?.events?[indexPath.row].dateEvent
+        cell.timeToStart.text = latestViewModel?.latestEventsData?.events?[indexPath.row].time
+    
         cell.contentView.layer.cornerRadius = 10
         cell.contentView.layer.borderWidth = 2
         cell.contentView.layer.borderColor = UIColor.gray.cgColor

@@ -86,6 +86,7 @@ class LeaguesTableViewController: UITableViewController {
         if segue.identifier == "leagueToDetail"{
             guard let selectedIndexPath = sender as? NSIndexPath else{ return }
               let detailLeagueViewController = segue.destination as! DetailLeagueViewController
+            
             detailLeagueViewController.latestViewModel = self.leaguesViewModel?.getMatchesViewModel(league: (leaguesViewModel?.moreInfoArray?.leagues[selectedIndexPath.row])!)
             
             detailLeagueViewController.allTeamsInLeagueViewModel = self.leaguesViewModel?.getAllTeamsInLeagueViewModel(league: (leaguesViewModel?.moreInfoArray?.leagues[selectedIndexPath.row])!)

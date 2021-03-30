@@ -11,9 +11,6 @@ import KRProgressHUD
 
 class DetailLeagueViewController: UIViewController {
     
-//    var isFinished: Bool?
-    
-
     @IBOutlet var detailLeagueTableView: UITableView! {
         didSet {
             detailLeagueTableView.delegate = self
@@ -94,6 +91,8 @@ extension DetailLeagueViewController: UITableViewDelegate,UITableViewDataSource 
             guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: UpComingEventsTableViewCell.self)) as? UpComingEventsTableViewCell else {
                 return UITableViewCell()
             }
+            cell.latestViewModel = self.latestViewModel
+            cell.allTeamsInLeague = self.allTeamsInLeagueViewModel
             
             return cell
         case 2:
