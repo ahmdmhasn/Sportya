@@ -8,7 +8,7 @@
 import Foundation
 
 protocol SportsProtocol {
-    func callFuncToGetAllSports()
+    func callFuncToGetAllSports(completionHandler:@escaping (Bool) -> Void)
     var getSports: ((SportsProtocol)->Void)? {get set}
     var sportData: Sport? {get set}
    
@@ -31,7 +31,8 @@ class SportsViewModel: SportsProtocol {
         }
     }
     
-    func callFuncToGetAllSports() {
+    func callFuncToGetAllSports(completionHandler:@escaping (Bool) -> Void) {
+        completionHandler(false)
         apiService.fetchData(endPoint: "all_sports.php", responseClass: Sport.self) {[weak self] (response) in
             switch response {
             case .success(let sports):
@@ -48,6 +49,7 @@ class SportsViewModel: SportsProtocol {
 //                    self.sportsView?.showError(error: errorMessage)
                 }
             }
+            completionHandler(true)
         }
 
     }

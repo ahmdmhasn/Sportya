@@ -20,6 +20,14 @@ class LatestEventsTableViewCell: UITableViewCell {
         }
     }
     
+    var allTeamsInLeague: AllTeamsInLeagueViewModel? {
+        didSet{
+            DispatchQueue.main.async {
+                self.latestEventCollectionView.reloadData()
+            }
+        }
+    }
+    
     @IBOutlet weak var latestEventCollectionView: UICollectionView! {
         didSet {
             latestEventCollectionView.delegate = self
@@ -40,16 +48,26 @@ class LatestEventsTableViewCell: UITableViewCell {
 
 extension LatestEventsTableViewCell: UICollectionViewDelegate,UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return latestViewModel?.latestEventsData?.events.count ?? 0
+        return latestViewModel?.latestEventsData?.events?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = latestEventCollectionView.dequeueReusableCell(withReuseIdentifier: String(describing: LatestEventsCollectionViewCell.self) , for: indexPath) as? LatestEventsCollectionViewCell else {
             return UICollectionViewCell()
         }
-        cell.dateLabel.text = latestViewModel?.latestEventsData?.events[indexPath.row].dateEvent
-        cell.homeTeamScoreLabel.text = latestViewModel?.latestEventsData?.events[indexPath.row].scoreHomeTeam
-        cell.awayTeamScoreLabel.text = latestViewModel?.latestEventsData?.events[indexPath.row].scoreAwayTeam
+        if allTeamsInLeague != nil && allTeamsInLeague?.twoTeams != nil && (allTeamsInLeague?.twoTeams!.count)! > 0 {
+            cell.homeTeamImage.sd_setImage(with: URL(string: (allTeamsInLeague?.twoTeams?[indexPath.row][0].imgURL ?? "")), placeholderImage: UIImage(named: "sports"))
+            
+            cell.awayTeamImage.sd_setImage(with: URL(string: (allTeamsInLeague?.twoTeams?[indexPath.row][1].imgURL) ?? ""), placeholderImage: UIImage(named: "sports"))
+            
+        }
+        
+        cell.homeTeamName.text = latestViewModel?.latestEventsData?.events?[indexPath.row].homeTeam
+        cell.awayTeamName.text = latestViewModel?.latestEventsData?.events?[indexPath.row].awayTeam
+                
+        cell.dateLabel.text = latestViewModel?.latestEventsData?.events?[indexPath.row].dateEvent
+        cell.homeTeamScoreLabel.text = latestViewModel?.latestEventsData?.events?[indexPath.row].scoreHomeTeam
+        cell.awayTeamScoreLabel.text = latestViewModel?.latestEventsData?.events?[indexPath.row].scoreAwayTeam
         
         cell.contentView.layer.cornerRadius = 10
         cell.contentView.layer.borderWidth = 2

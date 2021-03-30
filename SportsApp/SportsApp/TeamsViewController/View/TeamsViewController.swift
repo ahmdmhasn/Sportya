@@ -7,6 +7,7 @@
 
 import UIKit
 import SDWebImage
+import KRProgressHUD
 
 class TeamDetailsViewController: UIViewController {
     @IBOutlet weak var faceBookButton: UIButton!
@@ -25,7 +26,13 @@ class TeamDetailsViewController: UIViewController {
     @IBOutlet weak var backGroundImage: UIImageView!
     var teamsViewModel: TeamsViewModel? {
         didSet {
-            teamsViewModel?.callFuncToGetTeamDetail(teamId: (teamsViewModel?.selectedTeam?.teamId)!)
+            teamsViewModel?.callFuncToGetTeamDetail(teamId: (teamsViewModel?.selectedTeam?.teamId)!, completionHandler: {(isFinished) in
+                if !isFinished {
+                    KRProgressHUD.show()
+                } else {
+                       KRProgressHUD.dismiss()
+                }
+            })
             
             teamsViewModel?.getTeamDetail = {[weak self] vm in
                 
@@ -55,6 +62,8 @@ class TeamDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = teamsViewModel?.selectedTeam?.teamName
 
         
     }

@@ -9,7 +9,7 @@ import Foundation
 
 protocol LeaguesProtocol {
 
-    func callFuncToGetAllLeagues()
+    func callFuncToGetAllLeagues(completionHandler:@escaping (Bool) -> Void)
     var getLeagues: ((LeaguesProtocol)->Void)? {get}
     var leaguesData: AllLeagues? {get set}
     var selectedSport: AllSports? {get set}
@@ -48,7 +48,8 @@ class LeaguesViewModel: LeaguesProtocol {
     
     let apiService = APIClient()
     
-    func callFuncToGetAllLeagues() {
+    func callFuncToGetAllLeagues(completionHandler:@escaping (Bool) -> Void) {
+        completionHandler(false)
         apiService.fetchData(endPoint: "all_leagues.php", responseClass: AllLeagues.self) {[weak self] (response) in
             switch response {
             case .success(let leagues):
@@ -67,6 +68,7 @@ class LeaguesViewModel: LeaguesProtocol {
 //                    self.sportsView?.showError(error: errorMessage)
                 }
             }
+            completionHandler(true)
         }
         
     }

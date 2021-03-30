@@ -17,5 +17,7 @@ class LatestEventsCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var homeTeamScoreLabel: UILabel!
     @IBOutlet weak var awayTeamScoreLabel: UILabel!
+    @IBOutlet weak var homeTeamName: UILabel!
+    @IBOutlet weak var awayTeamName: UILabel!
     
 }

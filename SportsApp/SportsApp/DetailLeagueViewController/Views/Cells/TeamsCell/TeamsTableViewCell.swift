@@ -46,7 +46,7 @@ class TeamsTableViewCell: UITableViewCell {
 
 extension TeamsTableViewCell: UICollectionViewDelegate,UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return allTeamsInLeague?.teamDetailData?.teams.count ?? 0
+        return allTeamsInLeague?.teamDetailData?.teams?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -54,7 +54,7 @@ extension TeamsTableViewCell: UICollectionViewDelegate,UICollectionViewDataSourc
             return UICollectionViewCell()
         }
         
-        if let image = self.allTeamsInLeague?.teamDetailData?.teams[indexPath.row].imgURL {
+        if let image = self.allTeamsInLeague?.teamDetailData?.teams?[indexPath.row].imgURL {
             cell.teamImage.sd_setImage(with: URL(string: (image)), placeholderImage: UIImage(named: "sports"))
         }
 
@@ -68,7 +68,7 @@ extension TeamsTableViewCell: UICollectionViewDelegate,UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.delegate?.selectedItem(team: (self.allTeamsInLeague?.teamDetailData?.teams[indexPath.row])!)
+        self.delegate?.selectedItem(team: (self.allTeamsInLeague?.teamDetailData?.teams?[indexPath.row])!)
     }
 }
 

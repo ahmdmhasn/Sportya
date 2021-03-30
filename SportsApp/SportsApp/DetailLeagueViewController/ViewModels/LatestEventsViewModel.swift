@@ -10,18 +10,17 @@ import Foundation
 protocol LatestEventsProtocol {
     
     init(league: AllLeagueInfo)
-    func callFuncToGetLatestEvents(leagueId: String)
+    func callFuncToGetLatestEvents(leagueId: String, completionHandler: @escaping (Bool)->Void)
     var getLatestEvents: ((LatestEventsProtocol) -> Void)? {get}
     var latestEventsData: LatestEvents? {get set}
     var selectedLeague: AllLeagueInfo? {get set}
-    var twoTeams: [[Team]]? {get set}
 }
 
 
 
 class LatestEventsViewModel: LatestEventsProtocol {
     
-    var twoTeams: [[Team]]?
+//    var twoTeams: [[Team]]?
     
     required init(league: AllLeagueInfo) {
         self.selectedLeague = league
@@ -29,13 +28,14 @@ class LatestEventsViewModel: LatestEventsProtocol {
     }
     var apiService = APIClient()
     
-    func callFuncToGetLatestEvents(leagueId: String) {
-        
+    func callFuncToGetLatestEvents(leagueId: String,completionHandler: @escaping (Bool)->Void) {
+        completionHandler(false)
         apiService.fetchData(endPoint: "eventspastleague.php?id=\(leagueId)", responseClass: LatestEvents.self) {[weak self] (response) in
             switch response {
             case .success(let latestEvents):
                 self?.latestEventsData = latestEvents
 //                print(latestEvents)
+            
                 
             
 //                self.sportsView?.fetchingDataSuccess()
@@ -49,7 +49,10 @@ class LatestEventsViewModel: LatestEventsProtocol {
 //                    self.sportsView?.showError(error: errorMessage)
                 }
             }
+            completionHandler(true)
+            
         }
+        
     }
     
     var getLatestEvents: ((LatestEventsProtocol) -> Void)?
@@ -61,14 +64,5 @@ class LatestEventsViewModel: LatestEventsProtocol {
     }
     
     var selectedLeague: AllLeagueInfo?
-    
-    func getTeamsForLatestMatches(teams: Teams) {
-        twoTeams = []
-        for item in (latestEventsData?.events)! {
-            twoTeams?.append([teams.teams.filter({$0.teamId == item.homeTeamId})[0],
-                              teams.teams.filter({$0.teamId == item.awayTeamId})[0]
-                             ])
-            print(twoTeams)
-        }
-    }
+        
 }

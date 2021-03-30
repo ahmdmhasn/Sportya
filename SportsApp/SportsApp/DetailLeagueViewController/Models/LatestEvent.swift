@@ -8,7 +8,7 @@
 import Foundation
 
 struct LatestEvents: Codable {
-    var events: [Latest]
+    var events: [Latest]?
     
 }
 

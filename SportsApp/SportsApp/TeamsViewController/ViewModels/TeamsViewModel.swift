@@ -10,7 +10,7 @@ import Foundation
 protocol TeamsProtocol {
     
     init(team: Team)
-    func callFuncToGetTeamDetail(teamId: String)
+    func callFuncToGetTeamDetail(teamId: String,completionHandler: @escaping (Bool)->Void)
     var getTeamDetail: ((TeamsProtocol) -> Void)? {get}
     var teamDetailData: Teams? {get set}
     var selectedTeam: Team? {get set}
@@ -22,7 +22,8 @@ class TeamsViewModel: TeamsProtocol {
     }
     let apiService = APIClient()
     
-    func callFuncToGetTeamDetail(teamId: String) {
+    func callFuncToGetTeamDetail(teamId: String,completionHandler: @escaping (Bool)->Void) {
+        completionHandler(false)
         apiService.fetchData(endPoint: "lookupteam.php?id=\(teamId)", responseClass: Teams.self) {[weak self] (response) in
             switch response {
             case .success(let teamDetail):
@@ -41,6 +42,7 @@ class TeamsViewModel: TeamsProtocol {
 //                    self.sportsView?.showError(error: errorMessage)
                 }
             }
+            completionHandler(true)
         }
     }
     

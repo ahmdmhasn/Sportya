@@ -6,8 +6,8 @@
 //
 
 import UIKit
-import Alamofire
 import SDWebImage
+import KRProgressHUD
 
 class SportsViewController: UIViewController {
     
@@ -22,7 +22,14 @@ class SportsViewController: UIViewController {
     
     var sportsViewModel: SportsViewModel? {
         didSet {
-            sportsViewModel?.callFuncToGetAllSports()
+            sportsViewModel?.callFuncToGetAllSports(completionHandler: {(isFinished) in
+                if !isFinished {
+                    KRProgressHUD.show()
+                }else {
+                    KRProgressHUD.dismiss()
+                }
+                
+            })
             sportsViewModel?.getSports = {[weak self] vm in
                 DispatchQueue.main.async {
                     self?.sportsCollectionView.reloadData()
@@ -60,23 +67,21 @@ extension SportsViewController: UICollectionViewDelegate,UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let leaguesViewController = self.storyboard?.instantiateViewController(identifier: String(describing: LeaguesTableViewController.self)) as? LeaguesTableViewController else {
-            return
-        }
-        
-
-        leaguesViewController.leaguesViewModel = self.sportsViewModel?.getLeaguesViewModel(for: indexPath.row)
-        
-
-        self.navigationController?.pushViewController(leaguesViewController, animated: true)
+        collectionView.deselectItem(at: indexPath, animated: true)
+        self.performSegue(withIdentifier: "sportToLeagues", sender: indexPath)
     }
-    
-    
-    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let size = (view.frame.size.width - 30) / 2
         return CGSize(width: size, height: size)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "sportToLeagues"{
+            guard let selectedIndexPath = sender as? NSIndexPath else{ return }
+              let leaguesViewController = segue.destination as! LeaguesTableViewController
+            leaguesViewController.leaguesViewModel = self.sportsViewModel?.getLeaguesViewModel(for: selectedIndexPath.row)
+          }
     }
 }
 

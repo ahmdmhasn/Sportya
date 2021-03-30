@@ -13,12 +13,14 @@ class LeaguesTableViewController: UITableViewController {
    
     var leaguesViewModel: LeaguesViewModel? {
         didSet {
-            KRProgressHUD.show()
-            leaguesViewModel?.callFuncToGetAllLeagues()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-               KRProgressHUD.dismiss()
-            }
             
+            leaguesViewModel?.callFuncToGetAllLeagues(completionHandler: {(isFinished) in
+                if !isFinished {
+                    KRProgressHUD.show()
+                }else {
+                    KRProgressHUD.dismiss()
+                }
+            })
             leaguesViewModel?.getLeagues = {[weak self] viewModel in
                 DispatchQueue.main.async {
                     self?.tableView.reloadData()
@@ -33,6 +35,7 @@ class LeaguesTableViewController: UITableViewController {
 
         //add register
         tableView.register(UINib(nibName: "LeaguesTableViewCell", bundle: nil), forCellReuseIdentifier: String(describing: LeaguesTableViewCell.self))
+        self.title = leaguesViewModel?.selectedSport?.sportName
        
     }
 
@@ -73,20 +76,19 @@ class LeaguesTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let detailLeagueViewController = self.storyboard?.instantiateViewController(identifier: String(describing: DetailLeagueViewController.self)) as? DetailLeagueViewController else {
-            return
-        }
+        tableView.deselectRow(at: indexPath, animated: true)
         
-
-        detailLeagueViewController.latestViewModel = self.leaguesViewModel?.getMatchesViewModel(league: (leaguesViewModel?.moreInfoArray?.leagues[indexPath.row])!)
-        
-        detailLeagueViewController.allTeamsInLeagueViewModel = self.leaguesViewModel?.getAllTeamsInLeagueViewModel(league: (leaguesViewModel?.moreInfoArray?.leagues[indexPath.row])!)
-        
-        
-        
-        
-
-        self.navigationController?.pushViewController(detailLeagueViewController, animated: true)
+        self.performSegue(withIdentifier: "leagueToDetail", sender: indexPath)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "leagueToDetail"{
+            guard let selectedIndexPath = sender as? NSIndexPath else{ return }
+              let detailLeagueViewController = segue.destination as! DetailLeagueViewController
+            detailLeagueViewController.latestViewModel = self.leaguesViewModel?.getMatchesViewModel(league: (leaguesViewModel?.moreInfoArray?.leagues[selectedIndexPath.row])!)
+            
+            detailLeagueViewController.allTeamsInLeagueViewModel = self.leaguesViewModel?.getAllTeamsInLeagueViewModel(league: (leaguesViewModel?.moreInfoArray?.leagues[selectedIndexPath.row])!)
+          }
     }
     
     

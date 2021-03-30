@@ -10,6 +10,9 @@ import SDWebImage
 import KRProgressHUD
 
 class DetailLeagueViewController: UIViewController {
+    
+//    var isFinished: Bool?
+    
 
     @IBOutlet var detailLeagueTableView: UITableView! {
         didSet {
@@ -21,13 +24,15 @@ class DetailLeagueViewController: UIViewController {
     
     var latestViewModel: LatestEventsViewModel? {
         didSet {
-            KRProgressHUD.show()
-            latestViewModel?.callFuncToGetLatestEvents(leagueId: (latestViewModel?.selectedLeague!.leagueId)!)
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-               KRProgressHUD.dismiss()
-            }
-
+            latestViewModel?.callFuncToGetLatestEvents(leagueId: (latestViewModel?.selectedLeague!.leagueId)!, completionHandler: {(isFinished) in
+                
+                if (!isFinished) {
+                    KRProgressHUD.show()
+                }else {
+                       KRProgressHUD.dismiss()
+                }
+            })
             latestViewModel?.getLatestEvents = {[weak self] viewModel in
                 DispatchQueue.main.async {
                     self?.detailLeagueTableView.reloadData()
@@ -39,10 +44,21 @@ class DetailLeagueViewController: UIViewController {
     var allTeamsInLeagueViewModel: AllTeamsInLeagueViewModel? {
         didSet {
             
-            allTeamsInLeagueViewModel?.callAllTeamsInLeague(leagueId: (allTeamsInLeagueViewModel?.selectedLeague!.leagueId)!)
+            allTeamsInLeagueViewModel?.callAllTeamsInLeague(leagueId: (allTeamsInLeagueViewModel?.selectedLeague!.leagueId)!, completionHandler: {(isFinished) in
+                if !isFinished {
+                    KRProgressHUD.show()
+                }else {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                       KRProgressHUD.dismiss()
+                    }
+                }
+            })
             
             allTeamsInLeagueViewModel?.getAllTeamsInLeagueData = {[weak self] viewModel in
                 DispatchQueue.main.async {
+                    guard let teams = self?.allTeamsInLeagueViewModel?.teamDetailData else { return }
+                    guard let events = self?.latestViewModel?.latestEventsData else { return }
+                    self?.allTeamsInLeagueViewModel?.getTeamsForLatestMatches(teams: teams, arrayOfEvents: events)
                     self?.detailLeagueTableView.reloadData()
                 }
             }
@@ -51,7 +67,7 @@ class DetailLeagueViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        self.title = latestViewModel?.selectedLeague?.leagueName
         
     }
 }
@@ -85,6 +101,8 @@ extension DetailLeagueViewController: UITableViewDelegate,UITableViewDataSource 
                 return UITableViewCell()
             }
             cell.latestViewModel = self.latestViewModel
+            cell.allTeamsInLeague = self.allTeamsInLeagueViewModel
+            
             
             return cell
         case 3:
@@ -131,9 +149,11 @@ extension DetailLeagueViewController: CollectionCellDelegate {
         }
         
         teamDetailsViewController.teamsViewModel = self.allTeamsInLeagueViewModel?.getSelectedTeam(team: team)
+        teamDetailsViewController.modalPresentationStyle = .automatic
         
 
-        self.navigationController?.pushViewController(teamDetailsViewController, animated: true)
+        self.present(teamDetailsViewController, animated: true, completion: nil)
+        
     }
     
     
