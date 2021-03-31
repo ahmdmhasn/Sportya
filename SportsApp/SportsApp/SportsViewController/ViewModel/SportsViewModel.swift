@@ -42,12 +42,7 @@ class SportsViewModel: SportsProtocol {
 //                self.sportsView?.fetchingDataSuccess()
 //                self.sportsView?.hideIndicator()
             case .failure(let error):
-                let errorMessage = error.userInfo[NSLocalizedDescriptionKey]! as! String
-                if error.code == -1 {
-//                    self.sportsView?.showInternetMessage(message: errorMessage)
-                }else{
-//                    self.sportsView?.showError(error: errorMessage)
-                }
+                print(error)
             }
             completionHandler(true)
         }

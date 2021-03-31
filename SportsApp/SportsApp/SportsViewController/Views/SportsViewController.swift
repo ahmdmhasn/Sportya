@@ -8,10 +8,11 @@
 import UIKit
 import SDWebImage
 import KRProgressHUD
-
+import Reachability
 class SportsViewController: UIViewController {
     
-
+    let network: NetworkManager = NetworkManager.sharedInstance
+    
     @IBOutlet weak var sportsCollectionView: UICollectionView! {
         didSet {
             sportsCollectionView.delegate = self
@@ -40,8 +41,41 @@ class SportsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        sportsViewModel = SportsViewModel()
-
+        self.sportsViewModel = SportsViewModel()
+        NetworkManager.isUnreachable { _ in
+            self.showInternetMessage(message: "Cannot Load Sports")
+        }
+        
+    
+    }
+    
+    
+    func showInternetMessage(message: String) {
+        
+        let actionsheet = UIAlertController(title: message, message: "It seems that you are not connected with the internet please reconnect to get all sports or go to your favorite leagues", preferredStyle: .actionSheet)
+        
+        actionsheet.addAction(UIAlertAction(title: "Retry", style: .default, handler: {
+            action in
+            self.sportsViewModel?.callFuncToGetAllSports(completionHandler: { (isFinished) in
+                if !isFinished {
+                    KRProgressHUD.show()
+                }else {
+                    KRProgressHUD.dismiss()
+                }
+               
+            })
+            self.showInternetMessage(message: "Cannot Load Sports")
+            
+        }))
+        
+        actionsheet.addAction(UIAlertAction(title: "Go to favourite", style: .default, handler: {
+            action in
+            self.tabBarController?.selectedIndex = 1
+        }))
+        
+        actionsheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        present(actionsheet, animated: true, completion: nil)
     }
 }
 

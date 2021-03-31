@@ -11,6 +11,11 @@ import KRProgressHUD
 
 class DetailLeagueViewController: UIViewController {
     
+    var favoriteLeaguesViewModel : FavoriteLeaguesViewModel?
+    var isFavorite:Bool?
+    var favButton = UIBarButtonItem()
+    
+    
     @IBOutlet var detailLeagueTableView: UITableView! {
         didSet {
             detailLeagueTableView.delegate = self
@@ -27,7 +32,7 @@ class DetailLeagueViewController: UIViewController {
                 if (!isFinished) {
                     KRProgressHUD.show()
                 }else {
-                       KRProgressHUD.dismiss()
+                    KRProgressHUD.dismiss()
                 }
             })
             latestViewModel?.getLatestEvents = {[weak self] viewModel in
@@ -46,7 +51,7 @@ class DetailLeagueViewController: UIViewController {
                     KRProgressHUD.show()
                 }else {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                       KRProgressHUD.dismiss()
+                        KRProgressHUD.dismiss()
                     }
                 }
             })
@@ -66,9 +71,36 @@ class DetailLeagueViewController: UIViewController {
         super.viewDidLoad()
         self.title = latestViewModel?.selectedLeague?.leagueName
         
+        favButton = UIBarButtonItem(image: UIImage(systemName: "heart"), landscapeImagePhone: nil, style: .done, target: self, action: #selector(didTapFav(_:)))
+        self.navigationItem.rightBarButtonItem = favButton
+        
+        favoriteLeaguesViewModel = FavoriteLeaguesViewModel()
+        
+        guard ((self.latestViewModel?.selectedLeague?.leagueId) != nil) else {
+            return
+        }
+        
+         isFavorite = favoriteLeaguesViewModel?.checkLeagueExists(leagueId: (self.latestViewModel?.selectedLeague!.leagueId)!)
+        favButton.image = (UIImage (systemName: isFavorite! ? "heart.fill" : "heart"))
+        favButton.tintColor = UIColor.systemRed
+    }
+        
+    @objc func didTapFav(_ sender: UIBarButtonItem) {
+        guard let leagueName = self.latestViewModel?.selectedLeague?.leagueName,
+              let leagueImg = self.latestViewModel?.selectedLeague?.leagueImg,
+              let leagueYoutube = self.latestViewModel?.selectedLeague?.leagueYoutubeUrl,
+              let leagueId = self.latestViewModel?.selectedLeague?.leagueId else { return }
+        
+        self.favoriteLeaguesViewModel?.callFuncToAddNewFavoriteLeagueToCoreData(leagueName: leagueName, leagueImg: leagueImg, leagueYoutube: leagueYoutube, leagueId: leagueId)
+        
+        favButton.image = (UIImage (systemName: isFavorite! ? "heart" : "heart.fill"))
+        
+        self.isFavorite = !self.isFavorite!
+        if isFavorite == false {
+            favoriteLeaguesViewModel?.deleteFromCoreData(with: (self.latestViewModel?.selectedLeague!.leagueId)!)
+        }
     }
 }
-
 
 extension DetailLeagueViewController: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -150,7 +182,7 @@ extension DetailLeagueViewController: CollectionCellDelegate {
         teamDetailsViewController.teamsViewModel = self.allTeamsInLeagueViewModel?.getSelectedTeam(team: team)
         teamDetailsViewController.modalPresentationStyle = .automatic
         
-
+        
         self.present(teamDetailsViewController, animated: true, completion: nil)
         
     }

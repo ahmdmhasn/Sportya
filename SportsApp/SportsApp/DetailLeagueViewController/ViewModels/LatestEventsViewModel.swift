@@ -41,13 +41,7 @@ class LatestEventsViewModel: LatestEventsProtocol {
 //                self.sportsView?.fetchingDataSuccess()
 //                self.sportsView?.hideIndicator()
             case .failure(let error):
-                let errorMessage = error.userInfo[NSLocalizedDescriptionKey]! as! String
                 print(error)
-                if error.code == -1 {
-//                    self.sportsView?.showInternetMessage(message: errorMessage)
-                }else{
-//                    self.sportsView?.showError(error: errorMessage)
-                }
             }
             completionHandler(true)
             

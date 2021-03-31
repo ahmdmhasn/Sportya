@@ -9,7 +9,7 @@ target 'SportsApp' do
 pod 'Alamofire', '~> 5.2'
 pod 'SDWebImage', '~> 5.0'
 pod "KRProgressHUD"
-
+pod 'ReachabilitySwift'
 
   target 'SportsAppTests' do
     inherit! :search_paths

@@ -33,25 +33,12 @@ class AllTeamsInLeagueViewModel: AllTeamsInLeagueProtocol {
             switch response {
             case .success(let allLeagueTeams):
                 self?.teamDetailData = allLeagueTeams
-//                print(allLeagueTeams)
-                
-                
-            
-//                self.sportsView?.fetchingDataSuccess()
-//                self.sportsView?.hideIndicator()
             case .failure(let error):
-                let errorMessage = error.userInfo[NSLocalizedDescriptionKey]! as! String
                 print(error)
-                if error.code == -1 {
-//                    self.sportsView?.showInternetMessage(message: errorMessage)
-                }else{
-//                    self.sportsView?.showError(error: errorMessage)
-                }
+
             }
             completionHandler(true)
         }
-        
-        
     }
     
     var getAllTeamsInLeagueData: ((AllTeamsInLeagueProtocol) -> Void)?

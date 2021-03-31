@@ -68,6 +68,7 @@ extension TeamsTableViewCell: UICollectionViewDelegate,UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        teamsCollectionView.deselectItem(at: indexPath, animated: true)
         self.delegate?.selectedItem(team: (self.allTeamsInLeague?.teamDetailData?.teams?[indexPath.row])!)
     }
 }

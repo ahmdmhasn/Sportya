@@ -9,8 +9,10 @@ import UIKit
 import SDWebImage
 import KRProgressHUD
 
+
 class LeaguesTableViewController: UITableViewController {
-   
+    
+    
     var leaguesViewModel: LeaguesViewModel? {
         didSet {
             leaguesViewModel?.callFuncToGetAllLeagues(completionHandler: {(isFinished) in
@@ -36,7 +38,11 @@ class LeaguesTableViewController: UITableViewController {
         tableView.register(UINib(nibName: "LeaguesTableViewCell", bundle: nil), forCellReuseIdentifier: String(describing: LeaguesTableViewCell.self))
         self.title = leaguesViewModel?.selectedSport?.sportName
        
+        
+        
     }
+    
+    
 
     // MARK: - Table view data source
 

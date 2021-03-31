@@ -42,6 +42,6 @@ struct Team: Codable {
         case description = "strDescriptionEN"
         case country = "strCountry"
         case imgURL = "strTeamBadge"
-        case teamBanner = "strTeamBanner"
+        case teamBanner = "strTeamFanart1"
     }
 }

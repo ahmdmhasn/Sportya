@@ -57,20 +57,11 @@ class LeaguesViewModel: LeaguesProtocol {
                 self?.leaguesData?.leagues = (leagues?.leagues.filter({$0.leagueSportType == self?.selectedSport?.sportName}))!
                 
                 self?.getMoreInfoLeague()
-            
-//                self.sportsView?.fetchingDataSuccess()
-//                self.sportsView?.hideIndicator()
             case .failure(let error):
-                let errorMessage = error.userInfo[NSLocalizedDescriptionKey]! as! String
-                if error.code == -1 {
-//                    self.sportsView?.showInternetMessage(message: errorMessage)
-                }else{
-//                    self.sportsView?.showError(error: errorMessage)
-                }
+                print(error)
             }
             completionHandler(true)
         }
-        
     }
     
     func getMoreInfoLeague() {
@@ -84,12 +75,7 @@ class LeaguesViewModel: LeaguesProtocol {
                     
 
                 case .failure(let error):
-                    let errorMessage = error.userInfo[NSLocalizedDescriptionKey]! as! String
-                    if error.code == -1 {
-    //                    self.sportsView?.showInternetMessage(message: errorMessage)
-                    }else{
-    //                    self.sportsView?.showError(error: errorMessage)
-                    }
+                    print(error)
                 }
 
             }
