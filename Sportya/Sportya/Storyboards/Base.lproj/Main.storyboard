@@ -44,7 +44,7 @@
         <!--SPORTS-->
         <scene sceneID="NGA-Ib-Y03">
             <objects>
-                <viewController id="CMc-nT-9yy" customClass="SportsViewController" customModule="Sportya" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SportsViewController" id="CMc-nT-9yy" customClass="SportsViewController" customModule="Sportya" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hj2-wj-hGD">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

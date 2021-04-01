@@ -1,14 +1,14 @@
 //
-//  SportsAppTests.swift
-//  SportsAppTests
+//  SportsCollectionViewCell.swift
+//  SportyaTests
 //
-//  Created by Mahmoud Morsy on 19/03/2021.
+//  Created by Mahmoud Morsy on 01/04/2021.
 //
 
 import XCTest
 @testable import Sportya
 
-class SportsAppTests: XCTestCase {
+class SportsCollectionViewCell: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
