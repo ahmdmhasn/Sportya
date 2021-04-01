@@ -1,5 +1,5 @@
 # Sportya
-Simple IOS App to list all sports Leagues , Teams and , minimal information about every one and save your favourite Leagues
+Simple iOS App to list all sports Leagues , Teams and , minimal information about every one and save your favourite Leagues
 
 ## TODO :
 - [X] Create Application Design.
