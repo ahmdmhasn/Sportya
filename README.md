@@ -1,1 +1,26 @@
-# SportsApp
+# Sportya
+Simple IOS App to list all sports Leagues , Teams and , minimal information about every one and save your favourite Leagues
+
+## TODO :
+- [X] Create Application Design.
+- [X] Create Model Layer.
+- [X] Create Network Layer Using **Alamofire**.
+- [X] Show All sports and Leagues.
+- [X] Show Legues Details.
+- [X] Show Teams Details.
+- [X] Favourite League Feature using **CoreData**.
+- [X] Latest and Upcoming Matches for Leagues.
+- [X] Handling Offline Mode Using **Reachability**.
+
+## API : 
+https://thesportsdb.com/api.php
+
+## ScreenShots :
+
+
+## Technologies
+* Alamofire
+* CoreData
+* MVVM
+* Unit Testing
+* Rechability

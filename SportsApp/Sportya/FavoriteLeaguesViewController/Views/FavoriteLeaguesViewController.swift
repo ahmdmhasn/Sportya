@@ -89,12 +89,7 @@ extension FavoriteLeaguesViewController :  UITableViewDelegate, UITableViewDataS
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        network.reachability.whenReachable = { _ in
-            
-                self.performSegue(withIdentifier: "fromFavToLeagueDetail", sender: indexPath)
-            
-        }
+        self.performSegue(withIdentifier: "fromFavToLeagueDetail", sender: indexPath)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
