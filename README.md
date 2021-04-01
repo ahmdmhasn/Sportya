@@ -17,7 +17,7 @@ Simple iOS App to list all sports Leagues , Teams and , minimal information abou
 https://thesportsdb.com/api.php
 
 ## ScreenShots :
-![alt text](https://github.com/mahmoudmorsy201/Sportya/blob/main/Sportya/Screenshots/SportyaScreenShots.png)
+![alt text](https://github.com/mahmoudmorsy201/Sportya/blob/main/Sportya/Screenshots/SportyaScreenShots2.png)
 
 
 ## Technologies
