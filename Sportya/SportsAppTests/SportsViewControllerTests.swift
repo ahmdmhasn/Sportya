@@ -41,17 +41,7 @@ class SportsViewControllerTests: XCTestCase {
         XCTAssertNotNil(sportsViewController.sportsCollectionView.dataSource)
     }
     
+       
     
-    func testCellForRowAt() {
-        guard let sportsCollectionView = sportsViewController.sportsCollectionView else {
-            XCTFail()
-            return
-        }
-//        let cell = sportsCollectionView.dataSource?.collectionView(sportsCollectionView, cellForItemAt: IndexPath(item: 0, section: 0))
-       
-        
-        
-       
-    }
 
 }
